@@ -4,26 +4,26 @@ pipeline {
         SERVER_IP = credentials('prod-server-ip')
     }
     stages {
-        stage('Installation') {
-            steps {
-                sh '''
-                    sudo apt update
-                    sudo apt install -y python3 python3-pip python3-venv
-                    python3 -m venv venv
-                    . venv/bin/activate
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
-                '''
-            }
-        }
-        stage('Testing Env') {
-            steps {
-                sh '''
-                    . venv/bin/activate
-                    pytest
-                '''
-            }
-        }
+        // stage('Installation') {
+        //     steps {
+        //         sh '''
+        //             sudo apt update
+        //             sudo apt install -y python3 python3-pip python3-venv
+        //             python3 -m venv venv
+        //             . venv/bin/activate
+        //             pip install --upgrade pip
+        //             pip install -r requirements.txt
+        //         '''
+        //     }
+        // }
+        // stage('Testing Env') {
+        //     steps {
+        //         sh '''
+        //             . venv/bin/activate
+        //             pytest
+        //         '''
+        //     }
+        // }
         stage('Package to Codes') {
             steps {
                 sh "zip -r myapp.zip ./* -x '*.git*'"
